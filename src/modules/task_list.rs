@@ -52,6 +52,6 @@ mod tests {
         let task = task_list.get_task(0);
         assert_eq!(task.title, "first task");
         assert_eq!(task.description, "test task");
-        assert_eq!(task.to_string(), "title: first task");
+        assert_eq!(task.to_string(), "title: first task -> OPEN");
     }
 }
