@@ -2,8 +2,8 @@ use std::fmt::{Display, Formatter, Result};
 
 use chrono::prelude::*;
 
-#[derive(Debug, PartialEq)]
-enum TaskStatus {
+#[derive(Debug, PartialEq, Clone)]
+pub enum TaskStatus {
     Open,
     InProgress,
     Done,
@@ -19,7 +19,7 @@ impl Display for TaskStatus {
     }
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Task {
     pub title: String,
     pub description: String,
@@ -38,6 +38,21 @@ impl Task {
             updated_at: Utc::now(),
         }
     }
+    pub fn update_status(&mut self, status: TaskStatus) {
+        self.status = status;
+        self.updated_at = Utc::now();
+    }
+    pub fn update_task_title(&mut self, title: String) {
+        self.title = title;
+        self.updated_at = Utc::now();
+    }
+    pub fn update_task_description(&mut self, description: String) {
+        self.description = description;
+        self.updated_at = Utc::now();
+    }
+    pub fn get_status(&self) -> &TaskStatus {
+        &self.status
+    }
 }
 
 impl Display for Task {
@@ -47,7 +62,7 @@ impl Display for Task {
             "title: {} -> {} | created: {}, updated: {}",
             self.title,
             self.status,
-            self.created_at.format("%b %d, %Y %H:%M"),
+            self.created_at.format("%b %d, %Y %I:%M %P"),
             self.updated_at.format("%x %I:%M %P"),
         )
     }

@@ -1,4 +1,4 @@
-use crate::modules::task::Task;
+use crate::modules::task::{Task, TaskStatus};
 
 #[derive(Debug)]
 pub struct TaskList {
@@ -14,13 +14,26 @@ impl TaskList {
         }
     }
     pub fn add_task(&mut self, title: &str, description: &str) {
-        let task = Task::new(title, description);
+        let mut task = Task::new(title, description);
+        if self.total % 2 == 0 {
+            task.update_status(TaskStatus::InProgress);
+        }
         self.tasks.push(task);
         self.total += 1;
     }
     pub fn get_task(&mut self, index: usize) -> &Task {
         let task = self.tasks.get(index).expect("Error index is out of bound");
         task
+    }
+    pub fn get_in_progress_task(&self) -> Vec<Task> {
+        let in_progress_tasks: Vec<Task> = self
+            .tasks
+            .iter()
+            .filter(|&task| *task.get_status() == TaskStatus::InProgress)
+            .map(|task_ref| (*task_ref).clone())
+            .collect();
+        println!("{:?}", in_progress_tasks);
+        in_progress_tasks
     }
 }
 
@@ -53,5 +66,12 @@ mod tests {
         assert_eq!(task.title, "first task");
         assert_eq!(task.description, "test task");
         assert_eq!(task.to_string(), "title: first task -> OPEN");
+    }
+
+    #[test]
+    fn check_filter() {
+        let mut task_list = initialize_task_list();
+        let filtered_list = task_list.get_in_progress_task();
+        println!("{:?}", filtered_list);
     }
 }

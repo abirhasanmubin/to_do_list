@@ -1,3 +1,6 @@
+mod modules;
+
+use modules::views::*;
 fn main() {
-    println!("Hello, world!");
+    home_view();
 }
