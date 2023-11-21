@@ -1,0 +1,15 @@
++---------------------------------+
+|         TASK DETAILS            |
++---------------------------------+
+| Task ID: 123                    |
+| Description: Complete report    |
+| Status: In Progress             |
+| Created: 2023-11-15 10:00 AM    |
+| Last Updated: 2023-11-20 03:30 PM|
+|                                 |
+| 1. Update Task Status           |
+| 2. Edit Task                    |
+| 3. Delete Task                  |
+| 4. Go Back                      |
+|                                 |
++---------------------------------+
