@@ -1,6 +1,8 @@
 mod modules;
+mod utils;
+mod views;
 
-use modules::views::*;
+use views::home::*;
 fn main() {
-    home_view();
+    home();
 }
